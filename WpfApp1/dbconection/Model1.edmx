@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище KlinikaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Animals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IdGender" Type="int" />
+          <Property Name="IdType" Type="int" />
+          <Property Name="Vec" Type="int" />
+          <Property Name="Poct" Type="int" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurName" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Lastname" Type="nvarchar(max)" />
+          <Property Name="IdType" Type="int" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Priem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Idanimal" Type="int" />
+          <Property Name="Iddoctor" Type="int" />
+          <Property Name="Data" Type="date" />
+          <Property Name="Coment" Type="nvarchar(max)" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeAnimal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TypeDoctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Animals_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="IdGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Animals_TypeAnimal">
+          <End Role="TypeAnimal" Type="Self.TypeAnimal" Multiplicity="0..1" />
+          <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeAnimal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctor_TypeDoctor">
+          <End Role="TypeDoctor" Type="Self.TypeDoctor" Multiplicity="0..1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeDoctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Priem_Animals1">
+          <End Role="Animals" Type="Self.Animals" Multiplicity="0..1" />
+          <End Role="Priem" Type="Self.Priem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Priem">
+              <PropertyRef Name="Idanimal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Priem_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Priem" Type="Self.Priem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Priem">
+              <PropertyRef Name="Iddoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище KlinikaModelContainer">
+          <EntitySet Name="Animals" EntityType="Self.Animals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Priem" EntityType="Self.Priem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeAnimal" EntityType="Self.TypeAnimal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeDoctor" EntityType="Self.TypeDoctor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Animals_Gender" Association="Self.FK_Animals_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Animals_TypeAnimal" Association="Self.FK_Animals_TypeAnimal">
+            <End Role="TypeAnimal" EntitySet="TypeAnimal" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctor_TypeDoctor" Association="Self.FK_Doctor_TypeDoctor">
+            <End Role="TypeDoctor" EntitySet="TypeDoctor" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Priem_Animals1" Association="Self.FK_Priem_Animals1">
+            <End Role="Animals" EntitySet="Animals" />
+            <End Role="Priem" EntitySet="Priem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Priem_Doctor" Association="Self.FK_Priem_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Priem" EntitySet="Priem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KlinikaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Animals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdGender" Type="Int32" />
+          <Property Name="IdType" Type="Int32" />
+          <Property Name="Vec" Type="Int32" />
+          <Property Name="Poct" Type="Int32" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK_Animals_Gender" FromRole="Animals" ToRole="Gender" />
+          <NavigationProperty Name="TypeAnimal" Relationship="Self.FK_Animals_TypeAnimal" FromRole="Animals" ToRole="TypeAnimal" />
+          <NavigationProperty Name="Priem" Relationship="Self.FK_Priem_Animals1" FromRole="Animals" ToRole="Priem" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdType" Type="Int32" />
+          <NavigationProperty Name="TypeDoctor" Relationship="Self.FK_Doctor_TypeDoctor" FromRole="Doctor" ToRole="TypeDoctor" />
+          <NavigationProperty Name="Priem" Relationship="Self.FK_Priem_Doctor" FromRole="Doctor" ToRole="Priem" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Animals" Relationship="Self.FK_Animals_Gender" FromRole="Gender" ToRole="Animals" />
+        </EntityType>
+        <EntityType Name="Priem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Idanimal" Type="Int32" />
+          <Property Name="Iddoctor" Type="Int32" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+          <Property Name="Coment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <NavigationProperty Name="Animals" Relationship="Self.FK_Priem_Animals1" FromRole="Priem" ToRole="Animals" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Priem_Doctor" FromRole="Priem" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeAnimal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Animals" Relationship="Self.FK_Animals_TypeAnimal" FromRole="TypeAnimal" ToRole="Animals" />
+        </EntityType>
+        <EntityType Name="TypeDoctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Doctor_TypeDoctor" FromRole="TypeDoctor" ToRole="Doctor" />
+        </EntityType>
+        <Association Name="FK_Animals_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="IdGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Animals_TypeAnimal">
+          <End Role="TypeAnimal" Type="Self.TypeAnimal" Multiplicity="0..1" />
+          <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeAnimal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Priem_Animals1">
+          <End Role="Animals" Type="Self.Animals" Multiplicity="0..1" />
+          <End Role="Priem" Type="Self.Priem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Priem">
+              <PropertyRef Name="Idanimal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctor_TypeDoctor">
+          <End Role="TypeDoctor" Type="Self.TypeDoctor" Multiplicity="0..1" />
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeDoctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Priem_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="0..1" />
+          <End Role="Priem" Type="Self.Priem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Priem">
+              <PropertyRef Name="Iddoctor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KlinikaEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Animals" EntityType="Self.Animals" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
+          <EntitySet Name="Priem" EntityType="Self.Priem" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeAnimal" EntityType="Self.TypeAnimal" />
+          <EntitySet Name="TypeDoctor" EntityType="Self.TypeDoctor" />
+          <AssociationSet Name="FK_Animals_Gender" Association="Self.FK_Animals_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Animals_TypeAnimal" Association="Self.FK_Animals_TypeAnimal">
+            <End Role="TypeAnimal" EntitySet="TypeAnimal" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Priem_Animals1" Association="Self.FK_Priem_Animals1">
+            <End Role="Animals" EntitySet="Animals" />
+            <End Role="Priem" EntitySet="Priem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctor_TypeDoctor" Association="Self.FK_Doctor_TypeDoctor">
+            <End Role="TypeDoctor" EntitySet="TypeDoctor" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Priem_Doctor" Association="Self.FK_Priem_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Priem" EntitySet="Priem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KlinikaModelContainer" CdmEntityContainer="KlinikaEntities2">
+          <EntitySetMapping Name="Animals">
+            <EntityTypeMapping TypeName="KlinikaModel.Animals">
+              <MappingFragment StoreEntitySet="Animals">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="Vec" ColumnName="Vec" />
+                <ScalarProperty Name="Poct" ColumnName="Poct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctor">
+            <EntityTypeMapping TypeName="KlinikaModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SurName" ColumnName="SurName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="KlinikaModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Priem">
+            <EntityTypeMapping TypeName="KlinikaModel.Priem">
+              <MappingFragment StoreEntitySet="Priem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Idanimal" ColumnName="Idanimal" />
+                <ScalarProperty Name="Iddoctor" ColumnName="Iddoctor" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Coment" ColumnName="Coment" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KlinikaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeAnimal">
+            <EntityTypeMapping TypeName="KlinikaModel.TypeAnimal">
+              <MappingFragment StoreEntitySet="TypeAnimal">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeDoctor">
+            <EntityTypeMapping TypeName="KlinikaModel.TypeDoctor">
+              <MappingFragment StoreEntitySet="TypeDoctor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

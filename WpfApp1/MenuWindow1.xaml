@@ -1,0 +1,84 @@
+﻿<Window x:Class="WpfApp1.MenuWindow1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Menu" Height="450" Width="800" Background="Bisque" FontStyle="Italic">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Image Source="\Logo\logo-rvh-favicon.png"
+           Grid.ColumnSpan="3"
+           Grid.RowSpan="3" Margin="-27,0,64,54"/>
+
+        <TextBlock Text="Ветеринарная клиника"
+             Grid.ColumnSpan="3"
+               FontSize="20"
+               FontWeight="Bold"
+            TextWrapping="Wrap"
+               Padding=" 0 10 0 0"
+       VerticalAlignment="Center" Margin="0,0,50,0" Grid.Row="2" Height="54"/>
+
+        <Button x:Name="doctorBtn"
+            Content="Врачи"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+          VerticalContentAlignment="Center"
+            Background="Wheat"
+            Click="doctorBtn_Click" />
+        <Button x:Name="priemBtn"
+            Content="Приемы"
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+            VerticalContentAlignment="Center"
+ Background="Wheat"
+           Click="priemBtn_Click" Margin="0,54,0,54" Grid.RowSpan="3"/>
+        <Button x:Name="animalBtn"
+            Content="Животные"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+            VerticalContentAlignment="Center"
+            Background="Wheat"
+            Click="animalBtn_Click" Margin="0,54,0,0" Grid.RowSpan="2"/>
+        <Button x:Name="exitBtn"
+            Content="ВЫХОД"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"
+            FontSize="20"
+            VerticalContentAlignment="Center"
+            Background="Red"
+            Foreground="White"
+            Click="exitBtn_Click" Grid.Row="6"/>
+        <Frame x:Name="menuFr"
+               Grid.Column="2"
+               Grid.ColumnSpan="6"
+               Grid.RowSpan="8" Navigated="menuFr_Navigated"/>
+    </Grid>
+
+
+
+</Window>
