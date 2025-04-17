@@ -34,7 +34,7 @@ namespace WpfApp1
             }
             else
             {
-                MessageBox.Show("Неправильный пароль,дурачек");
+                MessageBox.Show("Кто ты , воин?");
             }
 
         }
